@@ -29,7 +29,7 @@ def index(request):
 
 		# 'dallas' : League.objects.filter(name__teams__contains = 'dallas')
 		# 'dallas' : Team.objects.filter(league__name__contains='Dallas'),
-		# 'dallas' : League.objects.filter(team_name__teams__contains = 'dallas'),
+		'dallas' : League.objects.filter(team_name__teams__contains = 'dallas'),
 		# 'dallas': Team.objecst.filter(team_name__contains = 'dallas'),
 		# todos los equipos con sede en Dallas
 
