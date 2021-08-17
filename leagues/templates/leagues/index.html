@@ -270,11 +270,21 @@
 		<h1> 14 todos los equipos que han tenido 12 o más jugadores, pasados y presentes. (SUGERENCIA: busque la función de anotación de Django).</h1>
 		<ol>
 			{% for a in contar %}
-				<li>{{a.location}}</li>
+				<li>{{a.team_name}}</li>
 			{% empty %}
 				<p>No leagues found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
 			{% endfor %}
 		</ol>
+
+		<h1> 15 todos los jugadores y el número de equipos para los que jugó, ordenados por la cantidad de equipos para los que han jugado</h1>
+		<ol>
+			{% for a in jugadores %}
+				<li>{{a.first_name}} {{a.last_name}} {{a.num_teams}}</li>
+			{% empty %}
+				<p>No leagues found.  Try <code>python manage.py loaddata data.json</code>, or, if that doesn't work, going <a href="{% url 'make_data' %}">here</a> (but be prepared to wait).</p>
+			{% endfor %}
+		</ol>
+
 	</body>
 </html>
 

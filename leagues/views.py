@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import League, Team, Player
+from django.db.models import  Count
 
 from . import team_maker
 
@@ -99,15 +100,10 @@ def index(request):
 		'noJoshua' : Player.objects.filter(first_name__contains = 'Joshua') & Player.objects.filter(all_teams__league__name__contains = 'Atlantic Federation of Amateur Baseball Players'),
 
 		# 14 todos los equipos que han tenido 12 o más jugadores, pasados y presentes. (SUGERENCIA: busque la función de anotación de Django).
-		'contar' : Team.objects.filter(location__contains = 'boston')
+		'contar' : Team.objects.annotate(num_players=Count('all_players')).filter(num_players__gte=12),
 
-
-
-
-
-
-
-
+		# 15 todos los jugadores y el número de equipos para los que jugó, ordenados por la cantidad de equipos para los que han jugado
+		'jugadores' : Player.objects.annotate(num_teams=Count('all_teams')).order_by('num_teams'),
 	}
 	return render(request, "leagues/index.html", context)
 
